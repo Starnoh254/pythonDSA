@@ -21,7 +21,7 @@ jobs:
         # # User email - required for git commits
         # useremail: # optional, default is bot@github.com
         # # Upstream repository owner/name. For example, zhangnew/sync-upstream
-        upstream: https://github.com/Starnoh254/pythonDSA.git
+        upstream: Starnoh254/pythonDSA
         # Upstream branch to merge from. For example, master
         upstream-branch: master
         # Branch to merge to. For example, master
