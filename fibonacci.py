@@ -20,6 +20,7 @@ def fibonacci_series (n):
 # I contributed to this code : by Starnoh John 2
 
 print(fibonacci_series(10))
+print(fibonacci_series(9))
 
 print(fibonacci_series(0))
 print(fibonacci_series(20))
