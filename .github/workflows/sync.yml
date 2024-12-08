@@ -1,0 +1,33 @@
+name: Sync Fork with Original Repo
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  sync-fork:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout your fork
+    - name: Checkout Fork
+      uses: actions/checkout@v3
+      with:
+        ref: main
+
+    # Step 2: Add the original repository as a remote
+    - name: Add Upstream Remote
+      run: git remote add upstream https://github.com/Starnoh254/pythonDSA.git
+
+    # Step 3: Fetch and merge upstream changes
+    - name: Fetch and Merge
+      run: |
+        git fetch upstream
+        git merge upstream/master
+
+    # Step 4: Push changes to your fork
+    - name: Push Changes to Fork
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: git push origin master
