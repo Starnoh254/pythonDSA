@@ -1,33 +1,33 @@
 name: Sync Fork with Original Repo
 
 on:
-  pull_request:
-    types: [closed]
+  workflow_dispatch:
+  schedule:
+      - cron: "0 0 * * *" # Runs daily at midnight UTC
 
 jobs:
   sync-fork:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout your fork
-    - name: Checkout Fork
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+    - name: Sync Upstream
+      # You may pin to the exact commit or the version.
+      # uses: zhangnew/sync-upstream@65060a2fa0bbbbf7ef07add408d1ed3dae9e53f8
+      uses: zhangnew/sync-upstream@v1
       with:
-        ref: main
-
-    # Step 2: Add the original repository as a remote
-    - name: Add Upstream Remote
-      run: git remote add upstream https://github.com/Starnoh254/pythonDSA.git
-
-    # Step 3: Fetch and merge upstream changes
-    - name: Fetch and Merge
-      run: |
-        git fetch upstream
-        git merge upstream/master
-
-    # Step 4: Push changes to your fork
-    - name: Push Changes to Fork
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: git push origin master
+        # # User name - required for git commits
+        # username: # optional, default is sync-upstream-bot
+        # # User email - required for git commits
+        # useremail: # optional, default is bot@github.com
+        # # Upstream repository owner/name. For example, zhangnew/sync-upstream
+        upstream: https://github.com/Starnoh254/pythonDSA.git
+        # Upstream branch to merge from. For example, master
+        upstream-branch: master
+        # Branch to merge to. For example, master
+        branch: master
+        # Personal access token (PAT) used to fetch the repository. The PAT is configured with the local git config, which enables your scripts to run authenticated git commands. The post-job step removes the PAT. We recommend using a service account with the least permissions necessary. Also when generating a new PAT, select the least scopes necessary. [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+    
+        token: ${{ secrets.GITHUB_TOKEN }}
+              
+    
