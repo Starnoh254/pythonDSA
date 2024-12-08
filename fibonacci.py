@@ -19,4 +19,6 @@ def fibonacci_series (n):
 
 # I contributed to this code : by Starnoh John 2
 
+print(fibonacci_series(10))
+
 print(fibonacci_series(0))
