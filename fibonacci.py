@@ -17,6 +17,8 @@ def fibonacci_series (n):
 
     return fibonacci_array
 
+# I contributed to this code : by Starnoh John 2
 
+print(fibonacci_series(10))
 
 print(fibonacci_series(0))
